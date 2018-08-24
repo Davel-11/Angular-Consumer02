@@ -18,9 +18,9 @@ export class PostService {
     return this.http.get(this.url);
   }
 
-  createPost(post){
-    
+  createPost(post){    
     return this.http.post(this.url, JSON.stringify(post) );
+    
   }
 
   updatePost(post){
@@ -28,13 +28,15 @@ export class PostService {
     return this.http.patch(this.url+ '/'+post.id, JSON.stringify({ isRead: true }) );
   }
 
-  deletePost(post){
-    return this.http.delete(this.url + '/'+ post.id  )
+  //Deleting Post with Handle application specifi
+  deletePost(Yid){
+    return this.http.delete(this.url + '/'+ Yid  )
     .catch((error: Response ) => { 
         if ( error.status === 404 )
-          return Observable.throw(new NotFoundError());
-        else   
-        return Observable.throw(new AppError(error) );
+          return Observable.throw(new NotFoundError());        
+        
+          return Observable.throw(new AppError(error) );
+        
     });
 
 
